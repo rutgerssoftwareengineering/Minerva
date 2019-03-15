@@ -64,7 +64,7 @@ export default class LinksScreen extends React.Component {
 
                 }}>
                 Joshua
-                
+                  
                 Olazo
               </Text>
             </LinearGradient>
