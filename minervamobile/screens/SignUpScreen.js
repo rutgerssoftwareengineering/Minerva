@@ -2,12 +2,13 @@ import React from 'react';
 import {Alert, Text, TextInput, View, StyleSheet, Button} from 'react-native';
 import { WebBrowser, LinearGradient } from 'expo';
 
-export default class LoginScreen extends React.Component {
+export default class SignUpScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      username: 'username',
-      password: 'password'
+      username: 'Username',
+      password: 'password',
+      email: 'email'
      };
   }
 
@@ -22,7 +23,6 @@ export default class LoginScreen extends React.Component {
   render() {
     const {navigate} = this.props.navigation;
   	return(
-
         <LinearGradient
         colors={['#74EBD5', '#ACB6E5']}
         style={{ flex: 1}}>
@@ -33,8 +33,14 @@ export default class LoginScreen extends React.Component {
 
             <Text
               style={styles.loginText}>
-            Login
+            Sign Up
             </Text>
+
+            <TextInput
+            style={styles.input}
+            onChangeText={(text) => this.setState({text})}
+            value={this.state.email}
+            />
 
           	<TextInput
   	        style={styles.input}
@@ -48,22 +54,15 @@ export default class LoginScreen extends React.Component {
             value={this.state.password}
             />
 
-            <View style={styles.rowContainer}>
-              <View style={styles.buttonLeft}>
-                <Button
-                  onPress={this.onPressLogin}
-                  title="Login"
-                />
-              </View>
-
-              <View style={styles.buttonRight}>
-                <Button
-                  onPress={() => navigate('SignUp')}
-                  title="Sign Up"
-                />
-              </View>
+            <View style={styles.button}>
+              <Button
+                type="clear"
+                onPress={() => navigate('Main')}
+                title="submit"
+              />
             </View>
-            
+
+
         </LinearGradient>
 
 	   )
@@ -96,17 +95,11 @@ const styles = StyleSheet.create ({
       color: '#fff',
       textAlign: 'center',
       marginTop: 50,
-      marginBottom: 50
+      marginBottom: 20
     },
-    buttonLeft: {
-      marginTop: 100,
-      marginRight: 50,
-    },
-    buttonRight: {
-      marginTop: 100,
-    },
-    rowContainer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-    },
+    button: {
+      marginTop: 50,
+      marginLeft: 150,
+      marginRight: 150,
+    }
     })
