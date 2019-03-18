@@ -38,10 +38,10 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Button
 } from 'react-native';
 import { WebBrowser, LinearGradient } from 'expo';
-
-import { MonoText } from '../components/StyledText';
+//import { MonoText } from '../components/StyledText';
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
@@ -49,6 +49,7 @@ export default class LinksScreen extends React.Component {
   };
 
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
             <LinearGradient
@@ -67,6 +68,11 @@ export default class LinksScreen extends React.Component {
                   
                 Olazo
               </Text>
+
+              <Button
+                onPress={()=>navigate('HomeScreen')}
+                title="Phuru"
+              />
             </LinearGradient>
       </View>
     );

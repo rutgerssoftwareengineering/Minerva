@@ -100,6 +100,7 @@ const styles = StyleSheet.create ({
     },
     buttonLeft: {
       marginTop: 100,
+      minWidth: 80,
       marginRight: 50,
     },
     buttonRight: {
