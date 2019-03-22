@@ -8,15 +8,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { WebBrowser, LinearGradient } from 'expo';
-
-import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
 
+  create_questions() {
+    //get the live questions from the backend 
+    var liveQuestions = {json object}
+    for question in liveQuestions: //this is python notation, figure out how to do in js
+      //create component 
+      //add as sub-component 
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -25,8 +29,11 @@ export default class HomeScreen extends React.Component {
             style={{ flex: 1}}>
               <Text
                 style={styles.titleText}>
-                Home
+                Question 
               </Text>
+              <ScrollView>
+
+              </ScrollView>
             </LinearGradient>
       </View>
     );

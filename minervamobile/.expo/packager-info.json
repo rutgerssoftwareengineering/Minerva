@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19005,
   "expoServerPort": 19000,
-  "packagerPort": 19004,
-  "packagerPid": 48135,
+  "packagerPort": 19006,
+  "packagerPid": 50807,
   "expoServerNgrokUrl": "https://2x-grx.anonymous.minervamobile.exp.direct",
   "packagerNgrokUrl": "https://packager.2x-grx.anonymous.minervamobile.exp.direct",
-  "ngrokPid": 48149
+  "ngrokPid": 50820
 }
