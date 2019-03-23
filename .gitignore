@@ -1,5 +1,7 @@
 
 minervamobile/node_modules
+.expo/packager-info.json
+minervamobile/.exp/packager-info.json
 
 npm-debug.log
 yarn-error.log
