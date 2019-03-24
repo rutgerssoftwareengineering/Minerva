@@ -6,9 +6,9 @@ export default class SignUpScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      username: 'Username',
-      password: 'password',
-      email: 'email'
+      username: this.state,
+      password: this.state,
+      email: this.state
      };
   }
 
@@ -38,18 +38,21 @@ export default class SignUpScreen extends React.Component {
 
             <TextInput
             style={styles.input}
+            placeholder='Enter your Email'
             onChangeText={(text) => this.setState({text})}
             value={this.state.email}
             />
 
           	<TextInput
-  	        style={styles.input}
+            style={styles.input}
+            placeholder='enter your netID'
   	        onChangeText={(text) => this.setState({text})}
   	        value={this.state.username}
   	     	  />
 
             <TextInput
             style={styles.input}
+            placeholder='Enter your Password'
             onChangeText={(text) => this.setState({text})}
             value={this.state.password}
             />

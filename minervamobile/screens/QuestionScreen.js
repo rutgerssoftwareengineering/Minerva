@@ -9,30 +9,35 @@ import {
   View,
 } from 'react-native';
 
+import { LinearGradient } from 'expo';
+
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
 
-  create_questions() {
+  //create_questions() {
     //get the live questions from the backend 
-    var liveQuestions = {json object}
-    for question in liveQuestions: //this is python notation, figure out how to do in js
+    //var liveQuestions = {json object}
+    // for question in liveQuestions: //this is python notation, figure out how to do in js
       //create component 
       //add as sub-component 
-  }
+  //}
+
   render() {
     return (
       <View style={styles.container}>
             <LinearGradient
             colors={['#74EBD5', '#ACB6E5']}
             style={{ flex: 1}}>
+
               <Text
                 style={styles.titleText}>
                 Question 
               </Text>
-              <ScrollView>
 
+              <ScrollView>
+                  
               </ScrollView>
             </LinearGradient>
       </View>

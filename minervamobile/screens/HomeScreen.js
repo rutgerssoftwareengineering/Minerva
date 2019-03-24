@@ -25,7 +25,12 @@ export default class HomeScreen extends React.Component {
             style={{ flex: 1}}>
               <Text
                 style={styles.titleText}>
-                Home
+                Announcements
+              </Text>
+
+              <Text
+                style={styles.p}>
+                Demo in progress
               </Text>
             </LinearGradient>
       </View>
@@ -36,10 +41,17 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
    titleText: {
       backgroundColor: 'transparent',
-      fontSize: 100,
+      fontSize: 45,
       color: '#fff',
       textAlign: 'center',
-      marginTop: 50
+      marginTop: 75
+    },
+
+    p: {
+      fontSize: 30,
+      color: '#fff',
+      textAlign: 'center',
+      marginTop: 100
     },
     container: {
     flex: 1,

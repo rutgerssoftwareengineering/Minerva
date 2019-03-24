@@ -1,13 +1,16 @@
 import React from 'react';
 import {Alert, Text, TextInput, View, StyleSheet, Button} from 'react-native';
 import { WebBrowser, LinearGradient } from 'expo';
+import { Card, CardSection, Input, Spinner } from '../components/common';
 
 export default class LoginScreen extends React.Component {
+
   constructor(props) {
     super(props);
+
     this.state = { 
-      username: 'username',
-      password: 'password'
+      username: this.state,
+      password: this.state 
      };
   }
 
@@ -16,7 +19,10 @@ export default class LoginScreen extends React.Component {
   };
 
   onPressLogin() {
-    Alert.alert("You've logged in!")
+    const {username,password} = this.state;
+    const {navigate} = this.props.navigation;
+    Alert.alert('Congrats on logging in!', `You are ${username} and your password is ${password}`)
+    navigate('Main');
   }
 
   render() {
@@ -37,21 +43,24 @@ export default class LoginScreen extends React.Component {
             </Text>
 
           	<TextInput
-  	        style={styles.input}
-  	        onChangeText={(text) => this.setState({text})}
-  	        value={this.state.username}
+            value={this.state.username}
+            onChangeText={(username) => this.setState({ username })}
+            placeholder={'Username'}
+            style={styles.input}
   	     	  />
 
             <TextInput
-            style={styles.input}
-            onChangeText={(text) => this.setState({text})}
             value={this.state.password}
+            onChangeText={(password) => this.setState({ password })}
+            placeholder={'Password'}
+            secureTextEntry={true}
+            style={styles.input}
             />
 
             <View style={styles.rowContainer}>
               <View style={styles.buttonLeft}>
                 <Button
-                  onPress={this.onPressLogin}
+                  onPress={this.onPressLogin.bind(this)}
                   title="Login"
                 />
               </View>
