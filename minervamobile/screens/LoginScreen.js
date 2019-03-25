@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, Text, TextInput, View, StyleSheet, Button} from 'react-native';
+import {Alert, Text, TextInput, View, StyleSheet, Button, Image} from 'react-native';
 import { WebBrowser, LinearGradient } from 'expo';
 import { Card, CardSection, Input, Spinner } from '../components/common';
 
@@ -32,11 +32,17 @@ export default class LoginScreen extends React.Component {
         <LinearGradient
         colors={['#74EBD5', '#ACB6E5']}
         style={{ flex: 1}}>
+        
+            <Image
+              style={styles.owl}
+              source={require('../assets/images/logo/owletWhite.png')}
+            />
+
           	<Text
 	            style={styles.titleText}>
             Minerva
           	</Text>
-
+              
             <Text
               style={styles.loginText}>
             Login
@@ -80,6 +86,13 @@ export default class LoginScreen extends React.Component {
 }
 
 const styles = StyleSheet.create ({
+
+    owl: {
+      height:100,
+      width: 100,
+      marginTop: 50,
+      alignSelf: 'center'
+    },
     input: {
       height: 40,
       padding: 10,
@@ -94,10 +107,10 @@ const styles = StyleSheet.create ({
     }, 
     titleText: {
       backgroundColor: 'transparent',
-      fontSize: 100,
+      fontSize: 75,
       color: '#fff',
       textAlign: 'center',
-      marginTop: 150
+      marginTop: -25
     },
     loginText: {
       backgroundColor: 'transparent',
@@ -111,6 +124,7 @@ const styles = StyleSheet.create ({
       marginTop: 100,
       minWidth: 80,
       marginRight: 50,
+      color: '#0D3B66',
     },
     buttonRight: {
       marginTop: 100,

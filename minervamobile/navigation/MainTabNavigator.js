@@ -4,7 +4,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import FeedbackScreen from '../screens/FeedbackScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
@@ -28,12 +28,12 @@ HomeStack.navigationOptions = {
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const FeedbackStack = createStackNavigator({
+  Links: FeedbackScreen,
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+FeedbackStack.navigationOptions = {
+  tabBarLabel: 'Feedback',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -57,11 +57,11 @@ QuestionStack.navigationOptions = {
 };
 
 
-const SettingsStack = createStackNavigator({
+const SignupStack = createStackNavigator({
   Settings: SignUpScreen,
 });
 
-SettingsStack.navigationOptions = {
+SignupStack.navigationOptions = {
   tabBarLabel: 'Sign Up',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -87,8 +87,8 @@ LoginStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  SettingsStack,
+  FeedbackStack,
+  SignupStack,
   LoginStack,
   QuestionStack,
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, Text, TextInput, View, StyleSheet, Button} from 'react-native';
+import {Alert, Text, TextInput, View, StyleSheet, Button,Image} from 'react-native';
 import { WebBrowser, LinearGradient } from 'expo';
 
 export default class SignUpScreen extends React.Component {
@@ -26,6 +26,12 @@ export default class SignUpScreen extends React.Component {
         <LinearGradient
         colors={['#74EBD5', '#ACB6E5']}
         style={{ flex: 1}}>
+
+            <Image
+              style={styles.owl}
+              source={require('../assets/images/logo/owletWhite.png')}
+            />  
+
           	<Text
 	            style={styles.titleText}>
             Minerva
@@ -73,6 +79,13 @@ export default class SignUpScreen extends React.Component {
 }
 
 const styles = StyleSheet.create ({
+
+    owl: {
+      height:100,
+      width: 100,
+      marginTop: 50,
+      alignSelf: 'center'
+    },
     input: {
       height: 40,
       padding: 10,
@@ -87,10 +100,10 @@ const styles = StyleSheet.create ({
     }, 
     titleText: {
       backgroundColor: 'transparent',
-      fontSize: 100,
+      fontSize: 75,
       color: '#fff',
       textAlign: 'center',
-      marginTop: 150
+      marginTop: -25
     },
     loginText: {
       backgroundColor: 'transparent',
