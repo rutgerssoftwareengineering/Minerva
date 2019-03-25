@@ -5,6 +5,8 @@ import MainTabNavigator from './MainTabNavigator';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import QuestionScreen from '../screens/QuestionScreen';
+import FeedbackScreen from '../screens/FeedbackScreen';
+import QuizScreen from '../screens/QuizScreen';
 
 export default createAppContainer(createSwitchNavigator({
   // You could add another route here for authentication.
@@ -13,5 +15,6 @@ export default createAppContainer(createSwitchNavigator({
   Main: MainTabNavigator,
   SignUp: SignUpScreen,
   Ask: QuestionScreen,
-
+  Quiz: QuizScreen,
+  Feedback: FeedbackScreen,
 }));

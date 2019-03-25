@@ -152,15 +152,16 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+    flex: 2,
   },
   button: {
-    height: 150,
-    width: 150,
+    height: 180,
+    width: 180,
     flexDirection: 'column',
     justifyContent:'center',
-    marginLeft: 10,
-    marginRight: 10,
     marginTop: 20,
+    flex:1,
+    paddingLeft: 15,
   },
   icon: {
     height: 150,

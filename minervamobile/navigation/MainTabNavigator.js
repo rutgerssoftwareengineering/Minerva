@@ -5,7 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import FeedbackScreen from '../screens/FeedbackScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import QuizScreen from '../screens/QuizScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import QuestionScreen from '../screens/QuestionScreen';
@@ -85,10 +85,25 @@ LoginStack.navigationOptions = {
   ),
 };
 
+const QuizStack = createStackNavigator({
+  Quiz: QuizScreen,
+});
+
+QuizStack.navigationOptions = {
+  tabBarLabel: 'Quiz',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+    />
+  ),
+};
+
 export default createBottomTabNavigator({
   HomeStack,
   FeedbackStack,
   SignupStack,
   LoginStack,
   QuestionStack,
+  QuizStack
 });
