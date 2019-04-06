@@ -119,13 +119,14 @@ const styles = StyleSheet.create({
     flex:1,
     marginLeft: 30,
     marginRight: 30,
-    backgroundColor: 'rgba(251,251,251,.4)',
+    backgroundColor: '#fbfbfb',
     borderRadius: 15,
+    opacity: .4,
   },
   choice: {
     color: '#fff',
     fontSize: 40,
-    textAlign: 'center',
-    opacity: 10,
+    opacity: 1,
+    textAlign: 'center'
   }
 });
