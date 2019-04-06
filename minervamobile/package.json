@@ -5,8 +5,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "test": "node ./node_modules/.bin/jest.cmd",
-    "test:debug": "node --inspect-brk node_modules/jest/bin/jest.js --runInBand"
+    "test": "node ./node_modules/jest/bin/jest.js --watchAll"
   },
   "jest": {
     "preset": "jest-expo"
@@ -22,7 +21,6 @@
     "redux": "^4.0.1"
   },
   "devDependencies": {
-    "@types/react-navigation": "^3.0.6",
     "babel-preset-expo": "^5.0.0",
     "jest-expo": "^32.0.0"
   },

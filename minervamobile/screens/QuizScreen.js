@@ -48,7 +48,7 @@ export default class QuizScreen extends React.Component {
 
               <Text
                 style={styles.header}>
-                  Quiz!
+                  Software Engineering
               </Text>
 
               <View style={styles.rowContainer}>

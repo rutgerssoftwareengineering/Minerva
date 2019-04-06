@@ -127,10 +127,7 @@ export default class FeedbackScreen extends React.Component {
                     source={require('../assets/images/feedback/thumb_down.png')}
                   />
                 </TouchableOpacity>  
-
-                <View style={styles.bottom}>
-
-              </View>
+              
               </View>
 
             </LinearGradient>
@@ -150,37 +147,31 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: '#fff',
     textAlign: 'center',
-    marginTop: 60
+    marginTop: 75
   },
   rowContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     flex: 2,
-    paddingLeft:20,
-    
   },
   button: {
-    height: 150,
-    width: 150,
+    height: 180,
+    width: 180,
     flexDirection: 'column',
     justifyContent:'center',
+    marginTop: 20,
     flex:1,
     paddingLeft: 15,
   },
   icon: {
-    height: 120,
-    width: 120,
+    height: 150,
+    width: 150,
   },
   icon2: {
-    height: 85,
-    width: 120,
+    height: 100,
+    width: 150,
   },
   buttonText: {
     color: '#fff',
-  },
-  bottom: {
-    marginBottom: 20,
-    paddingBottom: 20
   }
 });
-//    backgroundColor: 'rgba(251,251,251,.4)', for opacity on bg but not text
