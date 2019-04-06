@@ -56,6 +56,19 @@ QuestionStack.navigationOptions = {
   ),
 };
 
+const QuizStack = createStackNavigator({
+  Quiz: QuizScreen,
+});
+
+QuizStack.navigationOptions = {
+  tabBarLabel: 'Quiz',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+    />
+  ),
+};
 
 const SignupStack = createStackNavigator({
   Settings: SignUpScreen,
@@ -85,25 +98,11 @@ LoginStack.navigationOptions = {
   ),
 };
 
-const QuizStack = createStackNavigator({
-  Quiz: QuizScreen,
-});
-
-QuizStack.navigationOptions = {
-  tabBarLabel: 'Quiz',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
-};
-
 export default createBottomTabNavigator({
   HomeStack,
   FeedbackStack,
+  QuestionStack,
+  QuizStack,
   SignupStack,
   LoginStack,
-  QuestionStack,
-  QuizStack
 });
