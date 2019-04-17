@@ -51,7 +51,7 @@ export default class FeedbackScreen extends React.Component {
       <View style={styles.container}>
             <LinearGradient
             colors={['#74EBD5', '#ACB6E5']}
-            style={{ flex: 1}}>
+            style={styles.gradientContainer}>
 
               <Text
                 style={styles.header}>
@@ -141,6 +141,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    alignItems: 'center',
+  },
+  gradientContainer: {
+    flex: 1,
+    alignItems: 'center',
   },
   header: {
     backgroundColor: 'transparent',
@@ -152,6 +157,7 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     flex: 2,
   },
   button: {
@@ -159,9 +165,8 @@ const styles = StyleSheet.create({
     width: 180,
     flexDirection: 'column',
     justifyContent:'center',
-    marginTop: 20,
+    alignItems: 'center',
     flex:1,
-    paddingLeft: 15,
   },
   icon: {
     height: 150,
