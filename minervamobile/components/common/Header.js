@@ -26,7 +26,8 @@ const styles = {
       elevation: 5, // for android
      // position: 'relative',
   },
-  textStyle: { fontSize: 20 }
+  textStyle: { fontSize: 20 },
+  color: 'navy'
 
 };
 

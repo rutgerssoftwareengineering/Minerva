@@ -3,6 +3,7 @@ import {Alert, Text, TextInput, View, StyleSheet, Button,Image} from 'react-nati
 import { WebBrowser, LinearGradient } from 'expo';
 
 export default class SignUpScreen extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = { 
@@ -16,12 +17,15 @@ export default class SignUpScreen extends React.Component {
     header: null,
   };
 
-  onPressLogin() {
-    Alert.alert("You've logged in!")
+  onPressSign() {
+    const {username,password, email} = this.state;
+    const {navigate} = this.props.navigation;
+    Alert.alert("You've Signed Up!", ` Email: ${email} \n NetID: ${username} \n Pass: ${password}`);
+    navigate('Main');
+  
   }
 
   render() {
-    const {navigate} = this.props.navigation;
   	return(
         <LinearGradient
         colors={['#74EBD5', '#ACB6E5']}
@@ -45,29 +49,30 @@ export default class SignUpScreen extends React.Component {
             <TextInput
             style={styles.input}
             placeholder='Enter your Email'
-            onChangeText={(text) => this.setState({text})}
+            onChangeText={(email) => this.setState({email})}
             value={this.state.email}
             />
 
           	<TextInput
             style={styles.input}
             placeholder='enter your netID'
-  	        onChangeText={(text) => this.setState({text})}
+  	        onChangeText={(username) => this.setState({username})}
   	        value={this.state.username}
   	     	  />
 
             <TextInput
             style={styles.input}
             placeholder='Enter your Password'
-            onChangeText={(text) => this.setState({text})}
+            onChangeText={(password) => this.setState({password})}
             value={this.state.password}
+            secureTextEntry={true}
             />
 
             <View style={styles.button}>
               <Button
                 type="clear"
-                onPress={() => navigate('Main')}
-                title="submit"
+                onPress={this.onPressSign.bind(this)}
+                title="Submit"
               />
             </View>
 
