@@ -2,7 +2,7 @@ import React from 'react';
 import {Alert, Text, TextInput, View, StyleSheet, Button, Image} from 'react-native';
 import { WebBrowser, LinearGradient } from 'expo';
 import { Card, CardSection, Input, Spinner } from '../components/common';
-import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
+import { Stitch, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
 
 export default class LoginScreen extends React.Component {
 
@@ -45,6 +45,8 @@ export default class LoginScreen extends React.Component {
     //Alert.alert('Congrats on logging in!', `You are ${username} and your password is ${password}`)
 
     /*
+
+    This code anon logs in (don't do this)
     console.log(`${this.state.client}`);
     this.state.client.auth.loginWithCredential(new AnonymousCredential()).then(user => {
         console.log(`Successfully logged in as user ${user.id}`);
@@ -53,27 +55,27 @@ export default class LoginScreen extends React.Component {
         console.log(`Failed to log in anonymously: ${err.errorCode} with message ${err.message}`);
         this.setState({ currentUserId: undefined })
     });
-    //navigate('Main');
     */
 
-    console.log(`searching for user ${this.state.username}`);
+    //navigate('Main');
 
-    console.log(`name is ${this.state.usersCollection.constructor.name}`);
-
-    this.state.usersCollection.find({"name":"Cthrine Gemnett"}, {limit: 10})
-      .toArray()
-      .then(results => console.log('Results:', results))
-
-    /*
-    this.state.usersCollection.find({id: "Jonathan Hong"}, {limit:1}).first().then(result => {
+    this.state.usersCollection.find({id: username}, {limit:1}).first().then(result => {
       if(result) {
-        console.log(`Successfully found user: ${result}.`)
+        console.log(`Successfully found user: ${result.name} with netid ${result.id}.`)
+        if(result.password == password) {
+          console.log('right password');
+          navigate('Main');
+        } else {
+          Alert.alert("invalid password");
+          console.log('wrong password');
+        }
       } else {
-        console.log("couldn't find user")
+        console.log("couldn't find user");
+        Alert.alert('User not found');
       }
     })
     .catch(err => console.error(`Failed to find document: ${err}`))
-    */
+  
 
   }
 
@@ -103,7 +105,7 @@ export default class LoginScreen extends React.Component {
           	<TextInput
             value={this.state.username}
             onChangeText={(username) => this.setState({ username })}
-            placeholder={'Username'}
+            placeholder={'Netid'}
             style={styles.input}
   	     	  />
 
