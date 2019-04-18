@@ -170,146 +170,9 @@ export default class HomeScreen extends React.Component {
                       />
                     </View>
                   </View>
+
+
               </ScrollView>
-            
-
-
-                <View style={styles.card}>
-                    <Text style={styles.headerStyle}> Why is the sky blue?</Text>
-                    <View style= {styles.right}>
-                      <TouchableOpacity
-                       onPress={this.onUpvote.bind(this)}>
-                        <Image 
-                        style={styles.vote}
-                        source={require('../assets/images/feedback/upvote.png')}
-                       
-                        />  
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                      onPress={this.onDownvote.bind(this)}>
-                        <Image 
-                        style={styles.vote}
-                        source={require('../assets/images/feedback/downvote.png')}
-                        
-                        />  
-                      </TouchableOpacity>
-                    </View>
-                </View>
-                
-                <View style={styles.card}>
-                    <Text style={styles.headerStyle}> What are we here?</Text>
-                    <View style= {styles.right}>
-                      <TouchableOpacity
-                      onPress={this.onUpvote.bind(this)}>
-                        <Image 
-                        style={styles.vote}
-                        source={require('../assets/images/feedback/upvote.png')}
-                        
-                        />  
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                      onPress={this.onDownvote.bind(this)}>
-                        <Image 
-                        style={styles.vote}
-                        source={require('../assets/images/feedback/downvote.png')}
-                        
-                        />  
-                      </TouchableOpacity>
-                    </View>
-                </View>
-
-                <View style={styles.card}>
-                    <Text style={styles.headerStyle}> What does git revert do?</Text>
-                    <View style= {styles.right}>
-                      <TouchableOpacity
-                      onPress={this.onUpvote.bind(this)}>
-                        <Image 
-                        style={styles.vote}
-                        source={require('../assets/images/feedback/upvote.png')}
-                        
-                        />  
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                      onPress={this.onDownvote.bind(this)}>
-                        <Image 
-                        style={styles.vote}
-                        source={require('../assets/images/feedback/downvote.png')}
-                        
-                        />  
-                      </TouchableOpacity>
-                    </View>
-                </View>
-
-                <View style={styles.card}>
-                    <Text style={styles.headerStyle}> How do you pronounce SQL?</Text>
-                    <View style= {styles.right}>
-                      <TouchableOpacity
-                      onPress={this.onUpvote.bind(this)}>
-                        <Image 
-                        style={styles.vote}
-                        source={require('../assets/images/feedback/upvote.png')}
-                        
-                        />  
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                      onPress={this.onDownvote.bind(this)}>
-                        <Image 
-                        style={styles.vote}
-                        source={require('../assets/images/feedback/downvote.png')}
-                        
-                        />  
-                      </TouchableOpacity>
-                    </View>
-                </View>
-
-                <View style={styles.card}>
-                    <Text style={styles.headerStyle}>How can I host a server?</Text>
-                    <View style= {styles.right}>
-                      <TouchableOpacity
-                      onPress={this.onUpvote.bind(this)}>
-                        <Image 
-                        style={styles.vote}
-                        source={require('../assets/images/feedback/upvote.png')}
-                        
-                        />  
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                      onPress={this.onDownvote.bind(this)}>
-                        <Image 
-                        style={styles.vote}
-                        source={require('../assets/images/feedback/downvote.png')}
-                        
-                        />  
-                      </TouchableOpacity>
-                    </View>
-                </View>
-
-                <View style={styles.card}>
-                    <Text style={styles.headerStyle}>Who will win March Madness?</Text>
-                    <View style= {styles.right}>
-                      <TouchableOpacity
-                      onPress={this.onUpvote.bind(this)}>
-                        <Image 
-                        style={styles.vote}
-                        source={require('../assets/images/feedback/upvote.png')}
-                        
-                        />  
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                      onPress={this.onDownvote.bind(this)}>
-                        <Image 
-                        style={styles.vote}
-                        source={require('../assets/images/feedback/downvote.png')}
-                        
-                        />  
-                      </TouchableOpacity>
-                    </View>
-                </View>
-                </ScrollView>
-                <View style={styles.bottom}>
-
-              </View>
-            </LinearGradient>
       </View>
     );
   }
@@ -317,111 +180,49 @@ export default class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
    titleText: {
-    backgroundColor: 'transparent',
-    fontSize: 50,
-    color: '#74EBD5',
-    //fontSize: 75,
-    //color: '#fff',
-    textAlign: 'center',
-    marginTop: 50
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  flex: 1,
-    backgroundColor: '#fff',
-  },
-  questionCardTitle: {
-    color: '#fff',
-    margin: 5,
-    fontSize: 20,
-  },
-  questionCardScore: {
-    color: '#fff',
-    fontSize: 15,
-  },
-  questionCard: {
-    flex:1,
-    marginRight: 20,
-    marginLeft: 20,
-    marginTop: 20,
-    marginBottom: 20,
-    alignItems:'center',
-    borderRadius: 5,
-    backgroundColor: '#74EBD5',
-  },
-  upvoteButton: {
-    height: 50,
-    width: 50,
-  },
-  downvoteButton: {
-    height: 50,
-    width: 50,
-    transform: [{ rotate: '180deg'}],
-  },
-  rowContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 2,
-  },
-  card: {
-    alignContent: 'space-between',
-    flex: 4,
-    flexDirection: 'row',
-    backgroundColor: 'rgba(251,251,251,.4)',
-    borderRadius: 10,
-    maxHeight: 150,
-    marginRight: 10,
-    marginLeft: 10,
-    marginTop: 15,
-  },
-  headerStyle: {
-    color: 'navy',
-    marginTop: 25,
-    fontSize: 30,
-    fontWeight: 'bold',
-    flex: 3,
-    textAlign: 'center'
-  },
-  vote: {
-    height: 50,
-    width: 50,
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  right: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-  quest:{
-    flex: 4,
-    maxHeight: 150,
-    flexDirection:'row',
-    alignContent: 'space-between'
-  },
-  input: {
-    height: 40,
-    padding: 10,
-    marginTop: 20,
-    marginLeft: 20,
-    marginRight: 20,
-    fontSize: 18,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: '#48BBEC',
-    backgroundColor: 'white',
-    flex:3
-  }, 
-  button: {
-    minWidth: 80,
-    backgroundColor:'navy',
-    flex:1
-  },
-  bottom: {
-    marginBottom: 20,
-    paddingBottom: 20
-  }
+      backgroundColor: 'transparent',
+      fontSize: 50,
+      color: '#74EBD5',
+      textAlign: 'center',
+      marginTop: 50
+    },
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+    },
+    questionCardTitle: {
+      color: '#fff',
+      margin: 5,
+      fontSize: 20,
+    },
+    questionCardScore: {
+      color: '#fff',
+      fontSize: 15,
+    },
+    questionCard: {
+      flex:1,
+      marginRight: 20,
+      marginLeft: 20,
+      marginTop: 20,
+      marginBottom: 20,
+      alignItems:'center',
+      borderRadius: 5,
+      backgroundColor: '#74EBD5',
+    },
+    upvoteButton: {
+      height: 50,
+      width: 50,
+    },
+    downvoteButton: {
+      height: 50,
+      width: 50,
+      transform: [{ rotate: '180deg'}],
+    },
+    rowContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flex: 2,
+    },
 });
 

@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19012,
-  "expoServerPort": 19000,
-  "packagerPort": 19013,
-  "packagerPid": 81183,
-  "expoServerNgrokUrl": "https://uq-384.anonymous.minervamobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.uq-384.anonymous.minervamobile.exp.direct",
-  "ngrokPid": 81197,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }

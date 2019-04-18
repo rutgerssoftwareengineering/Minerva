@@ -2,27 +2,79 @@ import React from 'react';
 import {Alert, Text, TextInput, View, StyleSheet, Button, Image} from 'react-native';
 import { WebBrowser, LinearGradient } from 'expo';
 import { Card, CardSection, Input, Spinner } from '../components/common';
+import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
 
 export default class LoginScreen extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = { 
+    this.state={
+      currentUserId: undefined,
+      client: undefined,
+      db: undefined,
+      usersCollection: undefined,
       username: this.state,
-      password: this.state 
-     };
+      password: this.state
+    };
+    this._loadClient = this._loadClient.bind(this);
+    this._onPressLogin = this._onPressLogin.bind(this);
   }
+
+  componentDidMount() {
+    this._loadClient();
+  }
+
+  _loadClient() {
+  Stitch.initializeDefaultAppClient('minerva-mobile-zkhyz').then(client => {
+    this.setState({ client });
+    const dbClient = client.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
+    this.setState({atlasClient : dbClient});
+    this.setState({db : dbClient.db("minerva")});
+    this.setState({usersCollection: dbClient.db("minerva").collection("users")});
+    console.log("got here")
+  });
+}
 
   static navigationOptions = {
     header: null,
   };
 
-  onPressLogin() {
+  _onPressLogin() {
     const {username,password} = this.state;
     const {navigate} = this.props.navigation;
-    Alert.alert('Congrats on logging in!', `You are ${username} and your password is ${password}`)
-    navigate('Main');
+    //Alert.alert('Congrats on logging in!', `You are ${username} and your password is ${password}`)
+
+    /*
+    console.log(`${this.state.client}`);
+    this.state.client.auth.loginWithCredential(new AnonymousCredential()).then(user => {
+        console.log(`Successfully logged in as user ${user.id}`);
+        this.setState({ currentUserId: user.id })
+    }).catch(err => {
+        console.log(`Failed to log in anonymously: ${err.errorCode} with message ${err.message}`);
+        this.setState({ currentUserId: undefined })
+    });
+    //navigate('Main');
+    */
+
+    console.log(`searching for user ${this.state.username}`);
+
+    console.log(`name is ${this.state.usersCollection.constructor.name}`);
+
+    this.state.usersCollection.find({"name":"Cthrine Gemnett"}, {limit: 10})
+      .toArray()
+      .then(results => console.log('Results:', results))
+
+    /*
+    this.state.usersCollection.find({id: "Jonathan Hong"}, {limit:1}).first().then(result => {
+      if(result) {
+        console.log(`Successfully found user: ${result}.`)
+      } else {
+        console.log("couldn't find user")
+      }
+    })
+    .catch(err => console.error(`Failed to find document: ${err}`))
+    */
+
   }
 
   render() {
@@ -66,7 +118,7 @@ export default class LoginScreen extends React.Component {
             <View style={styles.rowContainer}>
               <View style={styles.buttonLeft}>
                 <Button
-                  onPress={this.onPressLogin.bind(this)}
+                  onPress={this._onPressLogin}
                   title="Login"
                 />
               </View>
