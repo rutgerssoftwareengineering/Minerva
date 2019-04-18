@@ -127,7 +127,7 @@ export default class LoginScreen extends React.Component {
 
               <View style={styles.buttonRight}>
                 <Button
-                  onPress={() => navigate('SignUp')}
+                  onPress={() => navigate('SignUp',{atlasClient:this.state.atlasClient})}
                   title="Sign Up"
                 />
               </View>

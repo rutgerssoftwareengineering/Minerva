@@ -9,8 +9,15 @@ export default class SignUpScreen extends React.Component {
     this.state = { 
       username: this.state,
       password: this.state,
-      email: this.state
+      email: this.state,
+      usersCollection: undefined,
      };
+  }
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    const atlasClient = navigation.getParam('atlasClient', undefined);
+    this.setState({usersCollection: atlasClient.db("minerva").collection("users")});
   }
 
   static navigationOptions = {
@@ -26,6 +33,10 @@ export default class SignUpScreen extends React.Component {
   }
 
   render() {
+    //const { navigation } = this.props;
+    //const atlasClient = navigation.getParam('atlasClient', undefined);
+    //const atlasClient = this.props.atlasClient;
+
   	return(
         <LinearGradient
         colors={['#74EBD5', '#ACB6E5']}
