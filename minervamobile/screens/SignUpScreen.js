@@ -1,6 +1,7 @@
 import React from 'react';
 import {Alert, Text, TextInput, View, StyleSheet, Button,Image} from 'react-native';
 import { WebBrowser, LinearGradient } from 'expo';
+//import { Stitch, RemoteMongoClient,BSON} from 'mongodb-stitch-react-native-sdk';
 
 export default class SignUpScreen extends React.Component {
 
@@ -10,7 +11,9 @@ export default class SignUpScreen extends React.Component {
       username: this.state,
       password: this.state,
       email: this.state,
+      name: this.state,
       usersCollection: undefined,
+      client: undefined,
      };
   }
 
@@ -18,6 +21,7 @@ export default class SignUpScreen extends React.Component {
     const { navigation } = this.props;
     const atlasClient = navigation.getParam('atlasClient', undefined);
     this.setState({usersCollection: atlasClient.db("minerva").collection("users")});
+    console.log("here!");
   }
 
   static navigationOptions = {
@@ -25,8 +29,23 @@ export default class SignUpScreen extends React.Component {
   };
 
   onPressSign() {
-    const {username,password, email} = this.state;
+    const {username,password,email, name} = this.state;
     const {navigate} = this.props.navigation;
+    
+    const newUser = {
+      "id": username,
+      "password": password,
+      "name": name,
+      "email": email,
+      "type": "student",
+           
+    }
+
+    this.state.usersCollection.insertOne(newUser)
+    .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}`))
+    .catch(err => console.error(`Failed to insert item: ${err}`))
+    
+    console.log("registered!");
     Alert.alert("You've Signed Up!", ` Email: ${email} \n NetID: ${username} \n Pass: ${password}`);
     navigate('Main');
   
@@ -62,6 +81,13 @@ export default class SignUpScreen extends React.Component {
             placeholder='Enter your Email'
             onChangeText={(email) => this.setState({email})}
             value={this.state.email}
+            />
+
+            <TextInput
+            style={styles.input}
+            placeholder='Enter your Name'
+            onChangeText={(name) => this.setState({name})}
+            value={this.state.name}
             />
 
           	<TextInput

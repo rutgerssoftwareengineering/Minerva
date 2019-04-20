@@ -2,7 +2,7 @@ import React from 'react';
 import {Alert, Text, TextInput, View, StyleSheet, Button, Image} from 'react-native';
 import { WebBrowser, LinearGradient } from 'expo';
 import { Card, CardSection, Input, Spinner } from '../components/common';
-import { Stitch, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
+import { Stitch, RemoteMongoClient,AnonymousCredential } from 'mongodb-stitch-react-native-sdk';
 
 export default class LoginScreen extends React.Component {
 
@@ -31,7 +31,7 @@ export default class LoginScreen extends React.Component {
     this.setState({atlasClient : dbClient});
     this.setState({db : dbClient.db("minerva")});
     this.setState({usersCollection: dbClient.db("minerva").collection("users")});
-    console.log("got here")
+    console.log("got here");
   });
 }
 
@@ -44,9 +44,7 @@ export default class LoginScreen extends React.Component {
     const {navigate} = this.props.navigation;
     //Alert.alert('Congrats on logging in!', `You are ${username} and your password is ${password}`)
 
-    /*
-
-    This code anon logs in (don't do this)
+    //This code anon logs in (don't do this)
     console.log(`${this.state.client}`);
     this.state.client.auth.loginWithCredential(new AnonymousCredential()).then(user => {
         console.log(`Successfully logged in as user ${user.id}`);
@@ -55,10 +53,10 @@ export default class LoginScreen extends React.Component {
         console.log(`Failed to log in anonymously: ${err.errorCode} with message ${err.message}`);
         this.setState({ currentUserId: undefined })
     });
-    */
+
 
     //navigate('Main');
-
+    console.log(`Username: ${username}`)
     this.state.usersCollection.find({id: username}, {limit:1}).first().then(result => {
       if(result) {
         console.log(`Successfully found user: ${result.name} with netid ${result.id}.`)

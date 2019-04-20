@@ -103,6 +103,4 @@ export default createBottomTabNavigator({
   FeedbackStack,
   QuestionStack,
   QuizStack,
-  SignupStack,
-  LoginStack,
 });
