@@ -1,6 +1,6 @@
 import React from 'react';
 import {Alert, Text, TextInput, View, StyleSheet, Button,Image} from 'react-native';
-import { WebBrowser, LinearGradient } from 'expo';
+import {LinearGradient } from 'expo';
 //import { Stitch, RemoteMongoClient,BSON} from 'mongodb-stitch-react-native-sdk';
 
 export default class SignUpScreen extends React.Component {
@@ -10,7 +10,6 @@ export default class SignUpScreen extends React.Component {
     this.state = { 
       username: this.state,
       password: this.state,
-      email: this.state,
       name: this.state,
       usersCollection: undefined,
       client: undefined,
@@ -29,24 +28,24 @@ export default class SignUpScreen extends React.Component {
   };
 
   onPressSign() {
-    const {username,password,email, name} = this.state;
+    const {username,password, name} = this.state;
     const {navigate} = this.props.navigation;
     
     const newUser = {
       "id": username,
       "password": password,
       "name": name,
-      "email": email,
       "type": "student",
            
     }
 
     this.state.usersCollection.insertOne(newUser)
-    .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}`))
+    .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}, username: ${username}, password: ${password}`))
+    .then(() =>navigate('Main',{atlasClient:this.state.atlasClient}))
     .catch(err => console.error(`Failed to insert item: ${err}`))
     
     console.log("registered!");
-    Alert.alert("You've Signed Up!", ` Email: ${email} \n NetID: ${username} \n Pass: ${password}`);
+    Alert.alert("You've Signed Up!", ` Name: ${name} \n NetID: ${username} \n Pass: ${password}`);
     navigate('Main');
   
   }
@@ -75,13 +74,6 @@ export default class SignUpScreen extends React.Component {
               style={styles.loginText}>
             Sign Up
             </Text>
-
-            <TextInput
-            style={styles.input}
-            placeholder='Enter your Email'
-            onChangeText={(email) => this.setState({email})}
-            value={this.state.email}
-            />
 
             <TextInput
             style={styles.input}

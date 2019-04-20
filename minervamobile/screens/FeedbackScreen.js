@@ -3,8 +3,6 @@
 import React from 'react';
 import {
   Image,
-  Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -12,7 +10,7 @@ import {
   Button,
   Alert
 } from 'react-native';
-import { WebBrowser, LinearGradient } from 'expo';
+import {LinearGradient } from 'expo';
 //import { MonoText } from '../components/StyledText';
 
 export default class FeedbackScreen extends React.Component {
@@ -20,6 +18,12 @@ export default class FeedbackScreen extends React.Component {
     header: null,
   };
 
+  componentDidMount() {
+    const { navigation } = this.props;
+    const atlasClient = navigation.getParam('atlasClient', undefined);
+    this.setState({usersCollection: atlasClient.db("minerva").collection("users")});
+    console.log("here!");
+  }
 
   onSlowDown(){
     Alert.alert('You asked to slow down')
