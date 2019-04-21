@@ -63,7 +63,7 @@ export default class LoginScreen extends React.Component {
         if(result.password == password) {
           console.log('right password');
           console.log(`Atlas: ${this.state.atlasClient}`);
-          navigate('Home',{atlasClient:this.state.atlasClient});
+          navigate('Main',{atlasClient:this.state.atlasClient});
         } else {
           Alert.alert("invalid password");
           console.log('wrong password');

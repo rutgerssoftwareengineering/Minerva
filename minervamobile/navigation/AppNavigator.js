@@ -14,7 +14,6 @@ export default createAppContainer(createSwitchNavigator({
   LoginScreen: LoginScreen,
   Main: MainTabNavigator,
   SignUp: SignUpScreen,
-  Home: HomeScreen,
   //Ask: QuestionScreen,
   //Quiz: QuizScreen,
   //Feedback: FeedbackScreen,

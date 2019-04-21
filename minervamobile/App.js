@@ -1,12 +1,26 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, screenProps } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
+import { Stitch, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
 
 export default class App extends React.Component {
-  state = {
-    isLoadingComplete: false,
-  };
+  constructor(props){
+    super(props);
+    this.state= {
+      client: undefined,
+      atlasClient: undefined,
+      isLoadingComplete: false,
+    }
+  }
+
+  componentDidMount() {
+    Stitch.initializeDefaultAppClient('minerva-mobile-zkhyz').then(client => {
+      this.setState({client});
+      const dbClient = client.getServiceClient(RemoteMongoClient.factory,"mongodb-atlas");
+      this.setState({atlasClient: dbClient});
+    })
+  }
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -21,7 +35,7 @@ export default class App extends React.Component {
       return (
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
+          <AppNavigator screenProps={{atlasClient: this.state.atlasClient}}/>
         </View>
       );
     }

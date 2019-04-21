@@ -20,14 +20,17 @@ export default class HomeScreen extends React.Component {
       name: this.state,
       announceCollection: undefined,
       client: undefined,
+      dbClient: undefined,
      };
   }
 
   componentDidMount() {
     const { navigation } = this.props;
-    const atlasClient = navigation.getParam('atlasClient', undefined);
-    this.setState({announceCollection: atlasClient.db("minerva").collection("announcements")});
+    const dbClient = this.props.screenProps.atlasClient;
+    const announceCollection = dbClient.db("minerva").collection("announcements");
+    //this.setState({announceCollection: atlasClient.db("minerva").collection("announcements")});
     console.log("here!");
+    console.log(`Annoucne: ${announceCollection.find("_v")} yeet`)
   }
 
   fetchData(){
