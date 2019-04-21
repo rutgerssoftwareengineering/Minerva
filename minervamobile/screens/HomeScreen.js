@@ -10,9 +10,25 @@ import {
 } from 'react-native';
 import { WebBrowser, LinearGradient } from 'expo';
 
-import { MonoText } from '../components/StyledText';
-
 export default class HomeScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+      username: this.state,
+      name: this.state,
+      usersCollection: undefined,
+      announcementsCollection: undefined,
+      client: undefined,
+     };
+  }
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    const atlasClient = navigation.getParam('atlasClient', undefined);
+    this.setState({announcementsCollection: atlasClient.db("minerva").collection("announcements")});
+    console.log("here!");
+  }
+
   static navigationOptions = {
     header: null,
   };

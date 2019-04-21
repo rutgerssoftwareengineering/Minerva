@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, screenProps } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
@@ -9,6 +9,7 @@ import QuizScreen from '../screens/QuizScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import QuestionScreen from '../screens/QuestionScreen';
+
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -51,7 +52,7 @@ QuestionStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      name={Platform.OS === 'ios' ? 'ios-help' : 'md-help'}
     />
   ),
 };
@@ -65,12 +66,12 @@ QuizStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      name={Platform.OS === 'ios' ? 'ios-school' : 'md-school'}
     />
   ),
 };
 
-const SignupStack = createStackNavigator({
+/*const SignupStack = createStackNavigator({
   Settings: SignUpScreen,
 });
 
@@ -97,6 +98,7 @@ LoginStack.navigationOptions = {
     />
   ),
 };
+*/
 
 export default createBottomTabNavigator({
   HomeStack,
