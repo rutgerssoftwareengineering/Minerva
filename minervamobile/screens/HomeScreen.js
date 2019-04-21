@@ -10,14 +10,15 @@ import {
 } from 'react-native';
 import { WebBrowser, LinearGradient } from 'expo';
 
+
 export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
       username: this.state,
+      password: this.state,
       name: this.state,
-      usersCollection: undefined,
-      announcementsCollection: undefined,
+      announceCollection: undefined,
       client: undefined,
      };
   }
@@ -25,10 +26,17 @@ export default class HomeScreen extends React.Component {
   componentDidMount() {
     const { navigation } = this.props;
     const atlasClient = navigation.getParam('atlasClient', undefined);
-    this.setState({announcementsCollection: atlasClient.db("minerva").collection("announcements")});
+    this.setState({announceCollection: atlasClient.db("minerva").collection("announcements")});
     console.log("here!");
   }
 
+  fetchData(){
+    const {navigate} = this.props.navigation;
+    
+    this.state.announceCollection.find("_v")
+      .then((response) => response.json())
+      .then
+  }
   static navigationOptions = {
     header: null,
   };
