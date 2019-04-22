@@ -8,11 +8,11 @@ import {Card, CardSection} from './common';
 const AnnounceItem = ({item}) => {
     const {message, _id, classId} = item;
     //console.log(item);
-    const {textStyle} = styles;
+    const {textStyle, aCard, aSection,} = styles;
   return(
  
         <View>
-          <Card>
+          <Card >
             <CardSection>
           <Text style={textStyle}>{classId}:{message}</Text>
           </CardSection>
@@ -32,6 +32,13 @@ const styles = {
         fontSize: 18,
         textAlign: 'center'
     },
+
+    aCard: {
+
+    },
+    aSection: {
+      
+    }
 };
 
 export default AnnounceItem;

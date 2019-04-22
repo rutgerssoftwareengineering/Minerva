@@ -18,7 +18,9 @@ const QuestionItem = ({item}) => {
     
     <View style={rowContainer}>
       <TouchableOpacity
-        onPress={() => Alert.alert('You have upvoted!')}>
+        onPress={() => {
+          Alert.alert("WOO!");
+        }}>
         <Image 
           style={upvoteButton}
           source={require('../assets/images/upvote.png')}
@@ -30,7 +32,9 @@ const QuestionItem = ({item}) => {
       </Text>
       
       <TouchableOpacity
-        onPress={() => Alert.alert('You have Downvoted!')}
+        onPress={() => {
+          Alert.alert("NOOO!");
+        }}
       >
         <Image 
           style={downvoteButton}

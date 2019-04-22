@@ -13,6 +13,7 @@ import {
 
 import { LinearGradient } from 'expo';
 import QuestionItem from "../components/QuestionItem";
+import { Card,CardSection, Input } from '../components/common';
 
 const timer = require('react-native-timer');
 
@@ -26,9 +27,11 @@ export default class HomeScreen extends React.Component {
       dbClient: undefined,
       client: undefined, 
       qList: [],
+      askQ: this.state,
      };
 
      this._fetchData = this._fetchData.bind(this);
+     this.onAsk = this.onAsk.bind(this);
   }
 
   componentDidMount() {
@@ -63,16 +66,12 @@ export default class HomeScreen extends React.Component {
    
   }
 
-    onUpvote() {
-      Alert.alert('You have upvoted!')
-    }
-    onDownvote() {
-      Alert.alert('You have downvoted :(')
-    }
     onAsk(){
-      const {question} = this.state;
-      Alert.alert('You have asked a question!',`${question}`)
+      const {askQ} = this.state;
+      Alert.alert('You have asked a question!',`${askQ}`)
+      this.setState({askQ: undefined});
     }
+
   //create_questions() {
     //get the live questions from the backend 
     //var liveQuestions = {json object}
@@ -101,7 +100,7 @@ export default class HomeScreen extends React.Component {
   */
 
   render() {
-    const {container, titleText} = styles;
+    const {container, titleText, askCard, askInput, askButton} = styles;
 
     return (
       <View style={container}>
@@ -112,9 +111,31 @@ export default class HomeScreen extends React.Component {
                 style={titleText}>
                 Questions 
               </Text>
+
+            <Card style={askCard}>
+              <CardSection>
+                  <Input
+                    placeholder="Ask a question"
+                    label="Ask"
+                    value={this.state.askQ}
+                    onChangeText={askQ => this.setState({askQ})}
+                  />
+
+                  <TouchableOpacity
+                    onPress={this.onAsk}
+                  >
+                    <Text>
+                      Ask!
+                    </Text>
+                  </TouchableOpacity>
+
+              </CardSection>
+            </Card>
+
               <ScrollView>
                   {this.renderQuestions()}
               </ScrollView>
+
         </LinearGradient>
       </View>
     );
@@ -132,6 +153,15 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
+    },
+    askCard: {
+      borderRadius: 20,
+    },
+    askInput: {
+
+    },
+    askButton: {
+      
     },
 });
 
