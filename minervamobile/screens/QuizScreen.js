@@ -13,7 +13,7 @@ import {
   Alert
 } from 'react-native';
 import { WebBrowser, LinearGradient } from 'expo';
-import { BSON} from 'mongodb-stitch-react-native-sdk';
+const timerQuiz = require('react-native-timer');
 
 //import { MonoText } from '../components/StyledText';
 
@@ -30,7 +30,6 @@ export default class QuizScreen extends React.Component {
       ans4: undefined,
       netid: undefined
      };
-     this.setWatcher = this.setWatcher.bind(this);
   }
 
   static navigationOptions = {
@@ -82,44 +81,49 @@ export default class QuizScreen extends React.Component {
         console.log("can't find quiz");
       }
     })
-
   
-}
-
-setWatcher() {
-   // Create a change stream that watches the documents
-   const id1 = new BSON.ObjectId(this.state.docid);
-   const stream = this.props.screenProps.atlasClient.watch(id1);
-   // Set up a change event handler function for the stream
-   stream.onNext((event) => {
-     // Handle the change events for all specified documents here
-     console.log(event.fullDocument);
-   });
   }
 
-getCurrentQuestion() {
-    console.log("getting quesitons");
-    if(this.state.classQuizCollection == undefined) {
-      console.log("yikes")
-    }
-    this.state.classQuizCollection.find({classId: currentClassid, isActive: true}, {limit:1}).first().then(result => {
-      if(result) {
-        console.log(`Successfully found question: ${result.quizTitle}.`)
-        this.setState({
-          quizTitle: result.quizTitle,
-          question: result.question,
-          ans1: result.answers[0],
-          ans2: result.answers[0],
-          ans3: result.answers[0],
-          ans4: result.answers[0],
-        })
+  _startTimer(){
+    timerQuiz.setInterval(this,'getquizzes',() => {
+
+      this.state.classQuizCollection.find({isActive: true}, {limit:1}).first().then(result => {
+      if(result){
+
+        if(result.question == this.state.question) {
+          console.log("same question");
+        } else {
+          console.log("different question");
+          this.getCurrentQuestion();
+        }
       } else {
-        console.log("Couldn't find active class");
-        Alert.alert('No Class in Session');
       }
     })
-    .catch(err => console.error(`Failed to connect to Server: ${err}`))
 
+    },5000);
+   
+  }
+
+  getCurrentQuestion() {
+    timerQuiz.clearInterval(this);
+    console.log("---GETTING NEW QUESITON---");
+    this.state.classQuizCollection.find({isActive: true}, {limit:1}).first().then(result => {
+      if(result){
+        console.log("found quiz");
+        this.setState({
+          question: result.question,
+          ans1: result.answers[0],
+          ans2: result.answers[1],
+          ans3: result.answers[2],
+          ans4: result.answers[3],
+          docid: result._id,
+        })
+      } else {
+        console.log(`class id is ${this.state.currentClassid}`);
+        console.log("can't find quiz");
+      }
+    })
+    
   }
 
   onA(){
@@ -149,7 +153,7 @@ getCurrentQuestion() {
             console.log("adding new answer");
               classQuizCollection.updateOne(
                  { classId: currentClassid, isActive: true},
-                 { $addToSet: { "responses": [netid,"1"] }}
+                 { $addToSet: { "responses": [netid,"0"] }}
               )
               Alert.alert(`Ans ${result.answers[0]} selected`)
           }
@@ -159,7 +163,7 @@ getCurrentQuestion() {
         }
       })
     
-    this.setWatcher();
+    this._startTimer();
   }
 
   onB(){
@@ -188,7 +192,7 @@ getCurrentQuestion() {
             console.log("adding new answer");
               classQuizCollection.updateOne(
                  { classId: currentClassid, isActive: true},
-                 { $addToSet: { "responses": [netid,"2"] }}
+                 { $addToSet: { "responses": [netid,"1"] }}
               )
               Alert.alert(`Ans ${result.answers[0]} selected`)
           }
@@ -227,7 +231,7 @@ getCurrentQuestion() {
             console.log("adding new answer");
               classQuizCollection.updateOne(
                  { classId: currentClassid, isActive: true},
-                 { $addToSet: { "responses": [netid,"3"] }}
+                 { $addToSet: { "responses": [netid,"2"] }}
               )
               Alert.alert(`Ans ${result.answers[0]} selected`)
           }
@@ -266,7 +270,7 @@ getCurrentQuestion() {
             console.log("adding new answer");
               classQuizCollection.updateOne(
                  { classId: currentClassid, isActive: true},
-                 { $addToSet: { "responses": [netid,"4"] }}
+                 { $addToSet: { "responses": [netid,"3"] }}
               )
               Alert.alert(`Ans ${result.answers[0]} selected`)
           }
