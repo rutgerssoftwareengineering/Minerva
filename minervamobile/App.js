@@ -11,6 +11,7 @@ export default class App extends React.Component {
       client: undefined,
       atlasClient: undefined,
       isLoadingComplete: false,
+      netid: undefined,
     }
   }
 
@@ -35,7 +36,7 @@ export default class App extends React.Component {
       return (
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator screenProps={{atlasClient: this.state.atlasClient}}/>
+          <AppNavigator screenProps={{atlasClient: this.state.atlasClient, netid: this.state.netid}}/>
         </View>
       );
     }

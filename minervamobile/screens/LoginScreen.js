@@ -59,6 +59,7 @@ export default class LoginScreen extends React.Component {
     this.state.usersCollection.find({id: username}, {limit:1}).first().then(result => {
       if(result) {
         console.log(`Successfully found user: ${result.name} with netid ${result.id}.`)
+        this.props.screenProps.netid = result.id;
         if(result.password == password) {
           console.log('right password');
           navigate('Main',{atlasClient:this.state.atlasClient});
