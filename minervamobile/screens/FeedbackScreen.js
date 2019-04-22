@@ -68,27 +68,29 @@ export default class FeedbackScreen extends React.Component {
                   Software Engineering
               </Text>
 
+
               <View style={styles.rowContainer}>
+
                 <TouchableOpacity
                   style={styles.button}
-                  onPress={this.onSlowDown.bind(this)}
+                  onPress={this.onThumbDown.bind(this)}
                 >
                   <Image 
                     style={styles.icon}
-                    source={require('../assets/images/feedback/slow_down.png')}
+                    source={require('../assets/images/feedback/thumb_up.png')}
                   />
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   style={styles.button}
-                  onPress={this.onSpeedUp.bind(this)}
+                  onPress={this.onThumbUp.bind(this)}
                 >
                   <Image 
                     style={styles.icon}
-                    source={require('../assets/images/feedback/speed_up.png')}
+                    source={require('../assets/images/feedback/thumb_down.png')}
                   />
-                </TouchableOpacity>
-                
+                </TouchableOpacity>  
+
               </View>
 
               <View style={styles.rowContainer}>
@@ -117,30 +119,28 @@ export default class FeedbackScreen extends React.Component {
 
 
               <View style={styles.rowContainer}>
-
                 <TouchableOpacity
                   style={styles.button}
-                  onPress={this.onThumbDown.bind(this)}
+                  onPress={this.onSlowDown.bind(this)}
                 >
                   <Image 
                     style={styles.icon}
-                    source={require('../assets/images/feedback/thumb_up.png')}
+                    source={require('../assets/images/feedback/slow_down.png')}
                   />
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   style={styles.button}
-                  onPress={this.onThumbUp.bind(this)}
+                  onPress={this.onSpeedUp.bind(this)}
                 >
                   <Image 
                     style={styles.icon}
-                    source={require('../assets/images/feedback/thumb_down.png')}
+                    source={require('../assets/images/feedback/speed_up.png')}
                   />
-                </TouchableOpacity>  
-
+                </TouchableOpacity>
                 <View style={styles.bottom}>
 
-              </View>
+                </View>
               </View>
 
             </LinearGradient>
