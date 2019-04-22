@@ -28,7 +28,7 @@ export default class FeedbackScreen extends React.Component {
   componentDidMount() {
     const dbClient = this.props.screenProps.atlasClient;
     this.state.announceList = dbClient.db("minerva").collection("grades");
-    console.log("here!");
+    console.log("--- Feedback Screen ---");
   }
 
   onSlowDown(){
