@@ -45,7 +45,6 @@ export default class LoginScreen extends React.Component {
     //Alert.alert('Congrats on logging in!', `You are ${username} and your password is ${password}`)
 
     //This code anon logs in (don't do this)
-    console.log(`${this.state.client}`);
     this.state.client.auth.loginWithCredential(new AnonymousCredential()).then(user => {
         console.log(`Successfully logged in as user ${user.id}`);
         this.setState({ currentUserId: user.id })
@@ -62,7 +61,6 @@ export default class LoginScreen extends React.Component {
         console.log(`Successfully found user: ${result.name} with netid ${result.id}.`)
         if(result.password == password) {
           console.log('right password');
-          console.log(`Atlas: ${this.state.atlasClient}`);
           navigate('Main',{atlasClient:this.state.atlasClient});
         } else {
           Alert.alert("invalid password");

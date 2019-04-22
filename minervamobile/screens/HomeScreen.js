@@ -18,28 +18,40 @@ export default class HomeScreen extends React.Component {
       username: this.state,
       password: this.state,
       name: this.state,
-      announceCollection: undefined,
+      announceList: this.state,
       client: undefined,
       dbClient: undefined,
+      dataSource: undefined,
+      list: [],
      };
+     this._fetchData = this._fetchData.bind(this);
   }
 
   componentDidMount() {
-    const { navigation } = this.props;
+
     const dbClient = this.props.screenProps.atlasClient;
-    const announceCollection = dbClient.db("minerva").collection("announcements");
+    this.state.announceList = dbClient.db("minerva").collection("announcements");
+
     //this.setState({announceCollection: atlasClient.db("minerva").collection("announcements")});
-    console.log("here!");
-    console.log(`Annoucne: ${announceCollection.find("_v")} yeet`)
+    console.log("announcements!");
+    this._fetchData();
   }
 
-  fetchData(){
-    const {navigate} = this.props.navigation;
-    
-    this.state.announceCollection.find("_v")
-      .then((response) => response.json())
-      .then
+  _fetchData(){
+    this.state.announceList.find({}).toArray()
+    .then(result => {
+      console.log(`FOUND ${result.length} items!`)
+      result.forEach(renderAnnouncements())
+    });
   }
+
+  renderAnnouncements() {
+     const  {list} = this.state;
+    return list.array.forEach( item =>
+        <AnnounceItem item={item}/>
+      );
+  }
+
   static navigationOptions = {
     header: null,
   };
@@ -55,10 +67,9 @@ export default class HomeScreen extends React.Component {
                 Announcements
               </Text>
 
-              <Text
-                style={styles.p}>
-                Demo in progress
-              </Text>
+              <ScrollView>
+                {this.renderAnnouncements()}
+              </ScrollView>
             </LinearGradient>
       </View>
     );
