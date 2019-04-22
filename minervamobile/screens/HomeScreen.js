@@ -5,11 +5,10 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import { WebBrowser, LinearGradient } from 'expo';
-
+import { LinearGradient } from 'expo';
+import AnnounceItem from '../components/AnnounceItem';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -18,10 +17,9 @@ export default class HomeScreen extends React.Component {
       username: this.state,
       password: this.state,
       name: this.state,
-      announceList: this.state,
+      announcementCollection: this.state,
       client: undefined,
       dbClient: undefined,
-      dataSource: undefined,
       list: [],
      };
      this._fetchData = this._fetchData.bind(this);
@@ -30,7 +28,7 @@ export default class HomeScreen extends React.Component {
   componentDidMount() {
 
     const dbClient = this.props.screenProps.atlasClient;
-    this.state.announceList = dbClient.db("minerva").collection("announcements");
+    this.state.announcementCollection = dbClient.db("minerva").collection("announcements");
 
     //this.setState({announceCollection: atlasClient.db("minerva").collection("announcements")});
     console.log("announcements!");
@@ -38,17 +36,17 @@ export default class HomeScreen extends React.Component {
   }
 
   _fetchData(){
-    this.state.announceList.find({}).toArray()
+    this.state.announcementCollection.find({}).toArray()
     .then(result => {
       console.log(`FOUND ${result.length} items!`)
       this.setState({list: result})
-      console.log(result);
     });
   }
 
   renderAnnouncements() {
-     const  {list} = this.state;
-     console.log(`LIST! ${list}`);
+      return this.state.list.map(item =>
+    <AnnounceItem key={item._id} item ={item}/>);
+     
   }
 
   static navigationOptions = {
@@ -69,6 +67,7 @@ export default class HomeScreen extends React.Component {
               <ScrollView>
                 {this.renderAnnouncements()}
               </ScrollView>
+
             </LinearGradient>
       </View>
     );

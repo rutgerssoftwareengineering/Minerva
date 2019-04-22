@@ -1,21 +1,24 @@
 /* eslint-disable react-native/no-raw-text */
 import React from 'react';
-import {View,Text, Image, Linking} from 'react-native';
-import Card from './Card';
-import CardSection from './CardSection';
+import {View,Text} from 'react-native';
+import {Card, CardSection} from './common';
+
 
 // eslint-disable-next-line react/prop-types
-const ItemDetail = ({item}) => {
-    const {message, _id} = item;
-    const {headerContentStyle, textStyle} = styles;
+const AnnounceItem = ({item}) => {
+    const {message, _id, classId} = item;
+    console.log(item);
+    const {textStyle} = styles;
   return(
-    <Card>
-      <CardSection>
-        <View style={headerContentStyle}>
-          <Text style={textStyle}>{message}</Text>
+ 
+        <View>
+          <Card>
+            <CardSection>
+          <Text style={textStyle}>{classId}: {message}</Text>
+          </CardSection>
+          </Card>
         </View>
-      </CardSection>
-    </Card>
+  
   );
 };
 
@@ -26,8 +29,9 @@ const styles = {
     },
 
     textStyle: {
-        fontSize: 18
+        fontSize: 18,
+        textAlign: 'center'
     },
 };
 
-export default ItemDetail;
+export default AnnounceItem;
