@@ -12,34 +12,66 @@ import {
 } from 'react-native';
 
 import { LinearGradient } from 'expo';
+import QuestionItem from "../components/QuestionItem";
+import { Card,CardSection, Input } from '../components/common';
 
-import {Input} from '../components/common';
+const timer = require('react-native-timer');
 
 export default class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.state = { 
-      question: this.state 
+      question: this.state,
+      questionCollection: this.state,
+      dbClient: undefined,
+      client: undefined, 
+      qList: [],
+      askQ: this.state,
      };
+
+     this._fetchData = this._fetchData.bind(this);
+     this.onAsk = this.onAsk.bind(this);
+  }
+
+  componentDidMount() {
+    const dbClient = this.props.screenProps.atlasClient;
+    this.state.questionCollection = dbClient.db("minerva").collection("questions");
+    console.log("Questions!");
+    this._fetchData();
   }
 
   static navigationOptions = {
     header: null,
   };
 
-  
-    onUpvote() {
-      Alert.alert('You have upvoted!')
-    }
-    onDownvote() {
-      Alert.alert('You have downvoted :(')
-    }
+  _fetchData(){
+    timer.setInterval(this,'getquestions',() => {
+      this.state.questionCollection.find({}).toArray()
+      .then(result => {
+        console.log(`FOUND ${result.length} items!`)
+        this.setState({qList: result})
+      })
+    },5000);
+   
+  }
+
+  componentWillUnmount(){
+    timer.clearInterval(this);
+  }
+
+  renderQuestions() {
+    return this.state.qList.map(item =>
+    <QuestionItem key={item._id} item ={item}/>);
+   
+  }
+
     onAsk(){
-      const {question} = this.state;
-      Alert.alert('You have asked a question!',`${question}`)
+      const {askQ} = this.state;
+      Alert.alert('You have asked a question!',`${askQ}`)
+      this.setState({askQ: undefined});
     }
+
   //create_questions() {
     //get the live questions from the backend 
     //var liveQuestions = {json object}
@@ -68,111 +100,43 @@ export default class HomeScreen extends React.Component {
   */
 
   render() {
+    const {container, titleText, askCard, askInput, askButton} = styles;
+
     return (
-      <View style={styles.container}>
-      
+      <View style={container}>
+        <LinearGradient
+          colors={['#74EBD5', '#ACB6E5']}
+          style={{ flex: 1}}>
               <Text
-                style={styles.titleText}>
+                style={titleText}>
                 Questions 
               </Text>
+
+            <Card style={askCard}>
+              <CardSection>
+                  <Input
+                    placeholder="Ask a question"
+                    label="Ask"
+                    value={this.state.askQ}
+                    onChangeText={askQ => this.setState({askQ})}
+                  />
+
+                  <TouchableOpacity
+                    onPress={this.onAsk}
+                  >
+                    <Text>
+                      Ask!
+                    </Text>
+                  </TouchableOpacity>
+
+              </CardSection>
+            </Card>
+
               <ScrollView>
-                  <View style={styles.questionCard}>
-                    <Text style={styles.questionCardTitle}>
-                      I'm confused... what is the powerhouse of the cell?
-                    </Text>
-                    <View style={styles.rowContainer}>
-                      <Image 
-                        style={styles.upvoteButton}
-                        source={require('../assets/images/upvote.png')}
-                      />
-                      <Text style={styles.questionCardScore}>
-                        420
-                      </Text>
-                      <Image 
-                        style={styles.downvoteButton}
-                        source={require('../assets/images/upvote.png')}
-                      />
-                    </View>
-                  </View>
-
-                  <View style={styles.questionCard}>
-                    <Text style={styles.questionCardTitle}>
-                      Who gave you the right?
-                    </Text>
-                    <View style={styles.rowContainer}>
-                      <Image 
-                        style={styles.upvoteButton}
-                        source={require('../assets/images/upvote.png')}
-                      />
-                      <Text style={styles.questionCardScore}>
-                        190
-                      </Text>
-                      <Image 
-                        style={styles.downvoteButton}
-                        source={require('../assets/images/upvote.png')}
-                      />
-                    </View>
-                  </View>
-
-                  <View style={styles.questionCard}>
-                    <Text style={styles.questionCardTitle}>
-                      Salman sUCKS BaL!s
-                    </Text>
-                    <View style={styles.rowContainer}>
-                      <Image 
-                        style={styles.upvoteButton}
-                        source={require('../assets/images/upvote.png')}
-                      />
-                      <Text style={styles.questionCardScore}>
-                        187
-                      </Text>
-                      <Image 
-                        style={styles.downvoteButton}
-                        source={require('../assets/images/upvote.png')}
-                      />
-                    </View>
-                  </View>
-
-                  <View style={styles.questionCard}>
-                    <Text style={styles.questionCardTitle}>
-                      Forrest Song more like Forest BONG AHAHAHAHAH
-                    </Text>
-                    <View style={styles.rowContainer}>
-                      <Image 
-                        style={styles.upvoteButton}
-                        source={require('../assets/images/upvote.png')}
-                      />
-                      <Text style={styles.questionCardScore}>
-                        69
-                      </Text>
-                      <Image 
-                        style={styles.downvoteButton}
-                        source={require('../assets/images/upvote.png')}
-                      />
-                    </View>
-                  </View>
-
-                  <View style={styles.questionCard}>
-                    <Text style={styles.questionCardTitle}>
-                      I sexually Identify as an Attack Helicopter. Ever since I was a boy I dreamed of soaring over the oilfields dropping hot sticky loads on disgusting foreigners. People say to me that a person being a helicopter is Impossible and I'm fucking retarded but I don't care, I'm beautiful. I'm having a plastic surgeon install rotary blades, 30 mm cannons and AMG-114 Hellfire missiles on my body. From now on I want you guys to call me "Apache" and respect my right to kill from above and kill needlessly. If you can't accept me you're a heliphobe and need to check your vehicle privilege. Thank you for being so understanding.
-                    </Text>
-                    <View style={styles.rowContainer}>
-                      <Image 
-                        style={styles.upvoteButton}
-                        source={require('../assets/images/upvote.png')}
-                      />
-                      <Text style={styles.questionCardScore}>
-                        187
-                      </Text>
-                      <Image 
-                        style={styles.downvoteButton}
-                        source={require('../assets/images/upvote.png')}
-                      />
-                    </View>
-                  </View>
-
-
+                  {this.renderQuestions()}
               </ScrollView>
+
+        </LinearGradient>
       </View>
     );
   }
@@ -182,7 +146,7 @@ const styles = StyleSheet.create({
    titleText: {
       backgroundColor: 'transparent',
       fontSize: 50,
-      color: '#74EBD5',
+      color: '#fff',
       textAlign: 'center',
       marginTop: 50
     },
@@ -190,39 +154,14 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#fff',
     },
-    questionCardTitle: {
-      color: '#fff',
-      margin: 5,
-      fontSize: 20,
+    askCard: {
+      borderRadius: 20,
     },
-    questionCardScore: {
-      color: '#fff',
-      fontSize: 15,
+    askInput: {
+
     },
-    questionCard: {
-      flex:1,
-      marginRight: 20,
-      marginLeft: 20,
-      marginTop: 20,
-      marginBottom: 20,
-      alignItems:'center',
-      borderRadius: 5,
-      backgroundColor: '#74EBD5',
-    },
-    upvoteButton: {
-      height: 50,
-      width: 50,
-    },
-    downvoteButton: {
-      height: 50,
-      width: 50,
-      transform: [{ rotate: '180deg'}],
-    },
-    rowContainer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flex: 2,
+    askButton: {
+      
     },
 });
 
