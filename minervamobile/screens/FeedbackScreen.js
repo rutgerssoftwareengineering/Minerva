@@ -14,14 +14,20 @@ import {LinearGradient } from 'expo';
 //import { MonoText } from '../components/StyledText';
 
 export default class FeedbackScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+      announceList: undefined,
+     };
+  }
+
   static navigationOptions = {
     header: null,
   };
 
   componentDidMount() {
-    const { navigation } = this.props;
-    const atlasClient = navigation.getParam('atlasClient', undefined);
-    this.setState({usersCollection: atlasClient.db("minerva").collection("users")});
+    const dbClient = this.props.screenProps.atlasClient;
+    this.state.announceList = dbClient.db("minerva").collection("grades");
     console.log("here!");
   }
 

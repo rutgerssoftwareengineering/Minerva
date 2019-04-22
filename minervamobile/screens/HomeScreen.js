@@ -41,7 +41,7 @@ export default class HomeScreen extends React.Component {
     this.state.announceList.find({}).toArray()
     .then(result => {
       console.log(`FOUND ${result.length} items!`)
-      this.setState({list: result.data})
+      this.setState({list: result})
       console.log(result);
     });
   }
@@ -49,7 +49,6 @@ export default class HomeScreen extends React.Component {
   renderAnnouncements() {
      const  {list} = this.state;
      console.log(`LIST! ${list}`);
-    
   }
 
   static navigationOptions = {
