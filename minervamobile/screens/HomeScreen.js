@@ -41,15 +41,15 @@ export default class HomeScreen extends React.Component {
     this.state.announceList.find({}).toArray()
     .then(result => {
       console.log(`FOUND ${result.length} items!`)
-      result.forEach(renderAnnouncements())
+      this.setState({list: result.data})
+      console.log(result);
     });
   }
 
   renderAnnouncements() {
      const  {list} = this.state;
-    return list.array.forEach( item =>
-        <AnnounceItem item={item}/>
-      );
+     console.log(`LIST! ${list}`);
+    
   }
 
   static navigationOptions = {
