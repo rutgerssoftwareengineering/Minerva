@@ -14,6 +14,8 @@ import {
 import { LinearGradient } from 'expo';
 import QuestionItem from "../components/QuestionItem";
 
+const timer = require('react-native-timer');
+
 export default class HomeScreen extends React.Component {
 
   constructor(props) {
@@ -41,11 +43,18 @@ export default class HomeScreen extends React.Component {
   };
 
   _fetchData(){
-    this.state.questionCollection.find({}).toArray()
-    .then(result => {
-      console.log(`RECIEVERD ${result.length} items!`)
-      this.setState({qList: result})
-    });
+    timer.setInterval(this,'getquestions',() => {
+      this.state.questionCollection.find({}).toArray()
+      .then(result => {
+        console.log(`FOUND ${result.length} items!`)
+        this.setState({qList: result})
+      })
+    },5000);
+   
+  }
+
+  componentWillUnmount(){
+    timer.clearInterval(this);
   }
 
   renderQuestions() {
