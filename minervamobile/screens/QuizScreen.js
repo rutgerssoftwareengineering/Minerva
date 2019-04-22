@@ -81,7 +81,10 @@ export default class QuizScreen extends React.Component {
         console.log("can't find quiz");
       }
     })
-  
+
+    if(this.question == undefined) {
+      this._startTimer();
+    }
   }
 
   _startTimer(){
