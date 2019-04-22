@@ -18,6 +18,8 @@ export default class FeedbackScreen extends React.Component {
     super(props);
     this.state = { 
       announceList: undefined,
+      currentClassid: undefined,
+      gradesCollection: undefined,
      };
   }
 
@@ -27,32 +29,157 @@ export default class FeedbackScreen extends React.Component {
 
   componentDidMount() {
     const dbClient = this.props.screenProps.atlasClient;
-    this.state.announceList = dbClient.db("minerva").collection("grades");
+    const gradesCollection = dbClient.db("minerva").collection("grades");
+    this.setState({
+      gradesCollection: gradesCollection
+  })
+
     console.log("--- Feedback Screen ---");
+    //find current active class 
+    const classCollection = dbClient.db("minerva").collection("classes");
+    classCollection.find({inSession: true}, {limit:1}).first().then(result => {
+      if(result) {
+        console.log(`Successfully found active class: ${result.name}.`)
+        this.setState({
+          currentClassid: result.classId,
+          currentClass: result.name
+        })
+      } else {
+        console.log("Couldn't find active class");
+        Alert.alert('No Class in Session');
+      }
+    })
+    .catch(err => console.error(`Failed to connect to Server: ${err}`))
+    
   }
 
   onSlowDown(){
-    Alert.alert('You asked to slow down')
+      //find current feedback array 
+    console.log('slowing down');
+
+    console.log(`searching for classid ${this.state.currentClassid}`);
+
+    this.state.gradesCollection.find({classid: this.state.currentClassid}, {limit:1}).first().then(result => {
+      if(result) {
+        console.log(`Successfully found class feedback!: ${result.className}.`)
+      } else {
+        console.log("Couldn't find class feedback :(");
+        Alert.alert('Current Class does not have feedback');
+      }
+    })
+    .catch(err => console.error(`Failed to connect to Server: ${err}`))
+
+    this.state.gradesCollection.updateOne(
+       { classid: this.state.currentClassid},
+       { $inc: { "feedback.4": 1 }}
+    )
+
+
   }
 
   onSpeedUp(){
-    Alert.alert('You asked to speed up')
+    console.log('speeding up');
+
+    console.log(`searching for classid ${this.state.currentClassid}`);
+
+    this.state.gradesCollection.find({classid: this.state.currentClassid}, {limit:1}).first().then(result => {
+      if(result) {
+        console.log(`Successfully found class feedback!: ${result.className}.`)
+      } else {
+        console.log("Couldn't find class feedback :(");
+        Alert.alert('Current Class does not have feedback');
+      }
+    })
+    .catch(err => console.error(`Failed to connect to Server: ${err}`))
+
+    this.state.gradesCollection.updateOne(
+       { classid: this.state.currentClassid},
+       { $inc: { "feedback.5": 1 }}
+    )
   }
 
   onVolDown(){
-    Alert.alert('You asked to lower Volume')
+    console.log('lower volume');
+
+    console.log(`searching for classid ${this.state.currentClassid}`);
+
+    this.state.gradesCollection.find({classid: this.state.currentClassid}, {limit:1}).first().then(result => {
+      if(result) {
+        console.log(`Successfully found class feedback!: ${result.className}.`)
+      } else {
+        console.log("Couldn't find class feedback :(");
+        Alert.alert('Current Class does not have feedback');
+      }
+    })
+    .catch(err => console.error(`Failed to connect to Server: ${err}`))
+
+    this.state.gradesCollection.updateOne(
+       { classid: this.state.currentClassid},
+       { $inc: { "feedback.2": 1 }}
+    )
   }
 
   onVolUp(){
-    Alert.alert('You asked to Speak Up')
+    console.log('volume up');
+
+    console.log(`searching for classid ${this.state.currentClassid}`);
+
+    this.state.gradesCollection.find({classid: this.state.currentClassid}, {limit:1}).first().then(result => {
+      if(result) {
+        console.log(`Successfully found class feedback!: ${result.className}.`)
+      } else {
+        console.log("Couldn't find class feedback :(");
+        Alert.alert('Current Class does not have feedback');
+      }
+    })
+    .catch(err => console.error(`Failed to connect to Server: ${err}`))
+
+    this.state.gradesCollection.updateOne(
+       { classid: this.state.currentClassid},
+       { $inc: { "feedback.3": 1 }}
+    )
   }
 
   onThumbDown(){
-    Alert.alert('You dont understand :( ')
+    console.log("don't get it");
+
+    console.log(`searching for classid ${this.state.currentClassid}`);
+
+    this.state.gradesCollection.find({classid: this.state.currentClassid}, {limit:1}).first().then(result => {
+      if(result) {
+        console.log(`Successfully found class feedback!: ${result.className}.`)
+      } else {
+        console.log("Couldn't find class feedback :(");
+        Alert.alert('Current Class does not have feedback');
+      }
+    })
+    .catch(err => console.error(`Failed to connect to Server: ${err}`))
+
+    this.state.gradesCollection.updateOne(
+       { classid: this.state.currentClassid},
+       { $inc: { "feedback.0": 1 }}
+    )
   }
 
   onThumbUp(){
-    Alert.alert('You understand! :)')
+    console.log("i get it! ");
+
+    console.log(`searching for classid ${this.state.currentClassid}`);
+
+    this.state.gradesCollection.find({classid: this.state.currentClassid}, {limit:1}).first().then(result => {
+      if(result) {
+        console.log(`Successfully found class feedback!: ${result.className}.`)
+      } else {
+        console.log("Couldn't find class feedback :(");
+        Alert.alert('Current Class does not have feedback');
+      }
+    })
+    .catch(err => console.error(`Failed to connect to Server: ${err}`))
+
+    this.state.gradesCollection.updateOne(
+       { classid: this.state.currentClassid},
+       { $inc: { "feedback.1": 1 }}
+    )
   }
 
   render() {
@@ -65,7 +192,7 @@ export default class FeedbackScreen extends React.Component {
 
               <Text
                 style={styles.header}>
-                  Software Engineering
+                  {this.state.currentClass}
               </Text>
 
 
