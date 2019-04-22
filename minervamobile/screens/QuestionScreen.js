@@ -47,7 +47,7 @@ export default class HomeScreen extends React.Component {
 
   _fetchData(){
     timer.setInterval(this,'getquestions',() => {
-      this.state.questionCollection.find({}).toArray()
+      this.state.questionCollection.find({},{sort: {rank: -1}}).toArray()
       .then(result => {
         console.log(`FOUND ${result.length} items!`)
         this.setState({qList: result})
@@ -67,8 +67,18 @@ export default class HomeScreen extends React.Component {
   }
 
     onAsk(){
-      const {askQ} = this.state;
-      Alert.alert('You have asked a question!',`${askQ}`)
+      const {askQ, questionCollection} = this.state;
+
+      const newQuestion = {
+        "question": askQ,
+        "rank": 1,
+      }
+
+      questionCollection.insertOne(newQuestion)
+      .then(result => console.log(`Asked Question w/ ID:  ${result.insertedId}, Question: ${askQ}`))
+      .then(Alert.alert(`You've asked: ${askQ}`))
+      .catch(err => console.error(`Failed to ask question error: ${err}`))
+
       this.setState({askQ: undefined});
     }
 
