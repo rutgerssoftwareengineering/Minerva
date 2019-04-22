@@ -10,6 +10,8 @@ import {
 import { LinearGradient } from 'expo';
 import AnnounceItem from '../components/AnnounceItem';
 
+const timer = require('react-native-timer');
+
 export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -35,12 +37,19 @@ export default class HomeScreen extends React.Component {
     this._fetchData();
   }
 
+  componentWillUnmount(){
+    timer.clearInterval(this);
+  }
+
   _fetchData(){
-    this.state.announcementCollection.find({}).toArray()
-    .then(result => {
-      console.log(`FOUND ${result.length} items!`)
-      this.setState({list: result})
-    });
+    timer.setInterval(this,'getannounce',() => {
+      this.state.announcementCollection.find({}).toArray()
+      .then(result => {
+        console.log(`FOUND ${result.length} items!`)
+        this.setState({list: result})
+      })
+    },10000);
+   
   }
 
   renderAnnouncements() {

@@ -7,14 +7,14 @@ import {Card, CardSection} from './common';
 // eslint-disable-next-line react/prop-types
 const AnnounceItem = ({item}) => {
     const {message, _id, classId} = item;
-    console.log(item);
+    //console.log(item);
     const {textStyle} = styles;
   return(
  
         <View>
           <Card>
             <CardSection>
-          <Text style={textStyle}>{classId}: {message}</Text>
+          <Text style={textStyle}>{classId}:{message}</Text>
           </CardSection>
           </Card>
         </View>
