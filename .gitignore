@@ -1,5 +1,7 @@
 
-*node_modules
+minervamobile/node_modules
+minervamobile/.expo
+.expo
 
 npm-debug.log
 yarn-error.log
