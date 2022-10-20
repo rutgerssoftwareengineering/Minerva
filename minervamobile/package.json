@@ -13,7 +13,7 @@
   "dependencies": {
     "@expo/samples": "2.1.1",
     "braces": "^2.3.2",
-    "expo": "^32.0.0",
+    "expo": "^46.0.16",
     "mongodb-stitch-react-native-sdk": "^4.3.2",
     "mongodb-stitch-react-native-services-mongodb-remote": "^4.3.2",
     "react": "16.5.0",
